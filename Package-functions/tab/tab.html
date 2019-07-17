@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>tab切换</title>
+</head>
+<body>
+    <div class="wrapper">
+        <ul class="tab-list clearfix">
+            <li class="tab-item cur">
+                <a href="javascript:;">选项卡1</a>
+            </li>
+            <li class="tab-item">
+                <a href="javascript:;">选项卡2</a>
+            </li>
+            <li class="tab-item">
+                <a href="javascript:;">选项卡3</a>
+            </li>
+        </ul>
+        <div class="page-list">
+            <div class="page-item active">1</div>
+            <div class="page-item">2</div>
+            <div class="page-item">3</div>
+        </div>
+    </div>
+</body>
+<script src="./js/tab.js"></script>
+<script>
+    var tab = new Tab({
+        tabItem: 'tab-item',
+        pageItem: 'page-item',
+        cur: 'cur',
+        active: 'active'
+    })
+</script>
+</html>
