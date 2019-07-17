@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>insertAfter方法</title>
+</head>
+<body>
+    <div class="example" style="background: #eee">
+        <h3>我是h3</h3>
+        <a href="">我是a</a>
+        <p>我是p</p>
+    </div>
+</body>
+<script>
+    // 在原型上编程，写一个insertAfter方法
+    var example = document.getElementsByClassName('example')[0],
+        a = example.getElementsByTagName('a')[0],
+        p = example.getElementsByTagName('p')[0],
+        oSpan = document.createElement('span'),
+        oH6 = document.createElement('h6');
+    oSpan.innerHTML = "我是span";
+    oH6.innerHTML = "我是h6";
+
+    Element.prototype.insertAfter = function(target,afterNode){
+        var nextElem = afterNode.nextElementSibling;
+        if(nextElem){
+            this.insertBefore(target,nextElem);
+        }else{
+            this.appendChild(target)
+        }
+    }
+
+    example.insertAfter(oSpan,a)
+    example.insertAfter(oH6,p)
+</script>
+</html>
