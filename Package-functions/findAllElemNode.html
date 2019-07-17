@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>找到一个元素下面的所有的子元素节点</title>
+</head>
+<body>
+    <div class="nav" style="background: burlywood">
+        <ul>
+            <li>
+                <h1>h1</h1>
+                <a href="">aaaaa</a>
+                <p>ppppppp</p>
+                <div>
+                    <ul>
+                        <li>44444444</li>
+                        <li>
+                            <h2>h2</h2>
+                            <a href="">0000</a>
+                            <p>7777</p>
+                        </li>
+                    </ul>
+                </div>
+            </li>
+        </ul>
+        <div>
+            <p>
+                <a href="">8888</a>
+            </p>
+            <h3>
+                <strong>99999</strong>
+                <span>span0000</span>
+            </h3>
+        </div>
+    </div>
+</body>
+<script>
+    var oNav = document.getElementsByClassName('nav')[0];
+
+    function getFullChildren(node){
+        var children = node.childNodes,
+            len = children.length,
+            item;
+        if(node && node.nodeType === 1){
+            console.log(node)
+        }
+
+        for(var i = 0; i < len; i++){
+            item = children[i];
+
+            if(item.nodeType === 1){
+                getFullChildren(item);
+            }
+        }
+    }
+    getFullChildren(oNav)
+</script>
+</html>
