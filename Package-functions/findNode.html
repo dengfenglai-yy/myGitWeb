@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>向上/向下寻找元素节点</title>
+</head>
+<body>
+    <div>
+        <ul>
+            <li>
+                <h3>我是标题标签</h3>
+            </li>
+        </ul>
+    </div>
+    <div class="box">
+        我是文本节点
+        <!-- 我被注释了 -->
+        <a href="">我是超链接</a>
+        <p>我是段落</p>
+        <h4>我是标题标签</h4>
+        <span>我是span</span>
+    </div>
+</body>
+<script>
+    // 在原型上编程，找出一个元素的第n层父级元素
+    var h = document.getElementsByTagName('h3')[0];
+    var box = document.getElementsByClassName('box')[0];
+
+    Element.prototype.findParent = function(n){
+        var type = typeof(n),
+            elem = this;
+        if(type === 'undefined' || type != 'number'){
+            return elem.parentNode;
+        }else if(n < 0){
+            return undefined;
+        }
+
+        while(n){
+            elem = elem.parentNode;
+            n --;
+        }
+        return elem;
+        
+    }
+    console.log(h.findParent(2))
+
+
+
+    // 在原型上编程，遍历一个父元素的节点，找到他的子元素节点
+    // 有数字参数 -> 某一个对应的子元素节点
+    // 无数字参数 -> 子元素节点集合
+    var oBox = document.getElementsByClassName('box')[0];
+
+    Element.prototype.elemChildren = function(index){
+        var childNodes = this.childNodes,
+            len = childNodes.length,
+            item;
+
+        var tmp = {
+            'length': 0,
+            'push': Array.prototype.push,
+            'splice': Array.prototype.splice,
+        }
+
+        for(var i = 0; i < len; i++){
+            item = childNodes[i];
+
+            if(item.nodeType === 1){
+                tmp.push(item)
+            }
+        }
+
+        if(index !== undefined && typeof(index) != 'number'){
+            return undefined;
+        }
+
+        return index === undefined ? tmp : tmp[index];
+    }
+
+    console.log(oBox.elemChildren(2))
+</script>
+</html>
