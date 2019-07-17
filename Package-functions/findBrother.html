@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>寻找兄弟元素节点</title>
+</head>
+<body>
+    <div class="wrap">
+        <p></p>
+        <h1></h1>
+        <a href=""></a>
+        <strong></strong>
+        <em></em>
+        <h2></h2>
+    </div>
+</body>
+<script>
+    // 在原型上编程，寻找兄弟元素节点
+    // 参数为正，找之后的第n个
+    // 参数为负，找之前的第n个
+    // 参数为0，找到自己
+    var oWrap = document.getElementsByClassName('wrap')[0],
+        oStr = oWrap.getElementsByTagName('strong')[0];
+    
+    Element.prototype.elemSibling = function(n){
+        var elem = this;
+        while(n){
+            if(n > 0){
+                elem = elem.nextSibling;
+                while(elem && elem.nodeType !== 1){
+                    elem = elem.nextSibling;
+                }
+                n--;
+            }else if(n < 0){
+                elem = elem.previousSibling;
+                while(elem && elem.nodeType !== 1){
+                    elem = elem.previousSibling;
+                }
+                n++;
+            }
+        }
+
+        return elem;
+    }
+    console.log(oStr.elemSibling(2));
+    console.log(oStr.elemSibling(0));
+    console.log(oStr.elemSibling(-1))
+</script>
+</html>
