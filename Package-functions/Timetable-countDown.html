@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>时间表和设置倒计时</title>
+</head>
+<body>
+    <!-- 1、原型上编程，写一个数组时钟
+    2、原型上编程，写一个倒计时 -->
+
+    <h4></h4>
+    <p></p>
+</body>
+<script>
+    var oH4 = document.getElementsByTagName('h4')[0];
+
+    setInterval(function(){
+        oH4.innerHTML = new Date().getDateTime();
+    },1000)
+
+    Date.prototype.getDateTime = function(){
+        var year = this.getFullYear(),
+            month = this.getMonth() + 1,
+            day = this.getDate(),
+            hours = this.getHours(),
+            minutes = this.getMinutes(),
+            seconds = this.getSeconds();
+
+        function setZero(num){
+            if(num < 10){
+                num = '0' + num;
+            }
+            return num;
+        }
+
+        return year + '/' + setZero(month) + '/' + setZero(day) + ' ' + setZero(hours) + ':' + setZero(minutes) + ':' + setZero(seconds) ;
+    }
+
+
+    var p = document.getElementsByTagName('p')[0],
+        endTime = new Date(2029, 0, 1, 0, 0, 0).getTime();
+    var t = null;
+    t = setInterval(function(){
+            p.innerHTML = new Date().countDown(endTime,t)
+        },1000)
+    Date.prototype.countDown = function(endTime,timer){
+        var nowTime = this.getTime(),
+            leftTime = (endTime - nowTime) / 1000, // 时间差的秒数
+            d,
+            h,
+            m,
+            s;
+
+        if(leftTime >= 0){
+            d = Math.floor(leftTime / 60 / 60 / 24);
+            h = Math.floor(leftTime / 60 / 60 % 24);
+            m = Math.floor(leftTime / 60 % 60);
+            s = Math.floor(leftTime % 60); 
+        }else{
+            clearInterval(timer)
+        }
+        if(h < 10) h = '0' + h;
+        if(m < 10) m = '0' + m;
+        if(s < 10) s = '0' + s;
+
+        return d + '天' + h + '小时' + m + '分钟' + s + '秒';
+    }
+
+    // Math.round() 
+    // Math.ceil()  向上取整
+    // Math.floor() 向下取整
+</script>
+</html>
