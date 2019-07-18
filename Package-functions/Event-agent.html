@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>事件代理/委托</title>
+</head>
+<body>
+    <button>增加</button>
+    <ul>
+        <li>1</li>
+        <li>2</li>
+        <li>3</li>
+        <li>4</li>
+        <li>5</li>
+        <li>6</li>
+        <li>7</li>
+        <li>8</li>
+    </ul>
+</body>
+<script>
+    var oBtn = document.getElementsByTagName('button')[0],
+    oUl = document.getElementsByTagName('ul')[0],
+    oLi = oUl.getElementsByTagName('li');
+
+    oUl.onclick = function(e){
+        var e = e || window.event,
+            tar = e.target || e.srcElement;
+        
+        console.log(tar.innerText)
+        // 显示下标
+        var index = Array.prototype.indexOf.call(oLi,tar);
+        console.log('下标：' + index);
+    }
+
+    oBtn.onclick = function(){
+        var li = document.createElement('li');
+        li.innerText = oLi.length + 1;
+        oUl.appendChild(li);
+    }
+</script>
+</html>
