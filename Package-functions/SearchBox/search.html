@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+    <style>
+        input{
+            outline: none;
+            border: none;
+            box-sizing: border-box;
+        }
+        .input-wrap{
+            position: relative;
+            width: 250px;
+            height: 35px;
+            margin: 50px auto;
+        }
+        .input-wrap .auto-kw{
+            position: absolute;
+            left: 5px;
+            top: 8px;
+            z-index: -1;
+            font-size: 14px;
+            color: #989898;
+        }
+        .input-wrap .auto-kw.show{
+            display: block;
+            color: #989889;
+        }
+        .input-wrap .auto-kw.hide{
+            display: none;
+            color: #666;
+        }
+        .input-wrap .search-input{
+            width: 100%;
+            height: 100%;
+            background-color: transparent;
+            border: 1px solid #ddd;
+            text-indent: 5px;
+            color:#424242;
+        }
+    </style>
+</head>
+<body>
+    <div class="input-wrap">
+        <div class="auto-kw" id="J_autoKw">推荐词</div>
+        <input type="text" id="J_search_kw"
+        class="search-input">
+    </div>
+    <div id="J_recomKw" style="display:none">
+        ["美白独立日","LG显示器","洗发水套装","电脑主机","笔记本内存条"]
+    </div>
+</body>
+<script src="../utils.js"></script>
+<script src="./search.js"></script>
+<script>
+
+</script>
+</html>
